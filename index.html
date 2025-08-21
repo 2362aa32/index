@@ -3,159 +3,518 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Web de Mwema Divoc</title>
-    <link rel="stylesheet" href="styles.css">
-	
+    <title>Mwema Divoc - Développeur et Formateur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* RESET ET STYLES DE BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        /* EN-TÊTE */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* NAVIGATION */
+        nav {
+            background-color: var(--secondary-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0.5rem;
+        }
+
+        nav li {
+            margin: 0.3rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 4px;
+            display: block;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--primary-color);
+        }
+
+        /* CONTENU PRINCIPAL */
+        #contenu {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-content {
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .section-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* IMAGES RESPONSIVES */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+        }
+
+        /* ACCUEIL */
+        .photo-accueil {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        /* HISTORIQUE */
+        .historique-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .image-historique, .texte-historique {
+            flex: 1;
+        }
+
+        /* CONTACT */
+        .contact-item {
+            margin: 1.2rem 0;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: var(--transition);
+            padding: 0.8rem;
+            border-radius: 6px;
+            background-color: #f5f5f5;
+        }
+
+        .contact-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
+            border-radius: 50%;
+        }
+
+        /* EN SAVOIR PLUS */
+        .photo-et-parcours {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .photo, .parcours {
+            flex: 1;
+        }
+
+        .mes-projets, .formation, .creation-applications {
+            margin: 2rem 0;
+        }
+
+        .mes-amis {
+            margin: 2rem 0;
+        }
+
+        .amis-photos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .ami {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .ami p {
+            margin-top: 0.8rem;
+            font-style: italic;
+        }
+
+        /* SERVICES */
+        .photo-formation {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        /* PIED DE PAGE */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* MEDIA QUERIES POUR LE RESPONSIVE */
+        @media (min-width: 768px) {
+            header h1 {
+                font-size: 2.8rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            .historique-content, .photo-et-parcours {
+                flex-direction: row;
+            }
+            
+            .contact-link {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            header {
+                padding: 1.5rem 1rem;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav a {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .section-content {
+                padding: 1.5rem;
+            }
+            
+            .contact-link {
+                font-size: 0.9rem;
+            }
+            
+            .contact-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        /* AMÉLIORATIONS VISUELLES */
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        /* MENU BURGER PERSION MOBILE */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        @media (max-width: 600px) {
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                top: 1.5rem;
+                right: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav li {
+                margin: 0.2rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
     <header>
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <h1>BIENVENUE SUR LE SITE WEB DE MWEMA DIVOC</h1>
-		
+        <p>Développeur & Formateur en Informatique</p>
     </header>
 
     <nav>
-        <ul>
-            <li><a href="#acceuil" onclick="afficher('acceuil')">ACCUEIL</a></li>
-            <li><a href="#historique" onclick="afficher('historique')">HISTORIQUE</a></li>
-            <li><a href="#contact" onclick="afficher('contact')">CONTACT</a></li>
-            <li><a href="#en-savoir-plus" onclick="afficher('en-savoir-plus')">EN SAVOIR PLUS</a></li>
-			<li><a href="#nos-services" onclick="afficher('service')">NOS SERVICES</a></li>
-			
+        <ul id="navMenu">
+            <li><a href="#acceuil" class="active" onclick="afficher('acceuil'); return false;">ACCUEIL</a></li>
+            <li><a href="#historique" onclick="afficher('historique'); return false;">HISTORIQUE</a></li>
+            <li><a href="#contact" onclick="afficher('contact'); return false;">CONTACT</a></li>
+            <li><a href="#en-savoir-plus" onclick="afficher('en-savoir-plus'); return false;">EN SAVOIR PLUS</a></li>
+            <li><a href="#service" onclick="afficher('service'); return false;">NOS SERVICES</a></li>
         </ul>
     </nav>
 
     <section id="contenu">
-        <div id="acceuil" class="section-content">
+        <div id="acceuil" class="section-content active">
             <h2>Accueil</h2>
             <p>Bienvenue sur notre page ! Voici un aperçu de notre projet Mwema Divoc.</p>
-			<div class="photo-accueil">
-                <img src="4.jpeg" alt="Photo de Mwema Divoc" />
+            <div class="photo-accueil">
+                <img src="4.jpeg" alt="Photo de Mwema Divoc" onerror="this.src='https://placehold.co/600x400/3498db/white?text=Mwema+Divoc'">
+            </div>
+            <p>Je suis passionné par la technologie et je partage mes connaissances à travers des formations et la création d'applications innovantes.</p>
+            <a href="#contact" class="btn" onclick="afficher('contact'); return false;">Me contacter</a>
         </div>
-		
+        
         <div id="historique" class="section-content">
             <h2>Historique</h2>
             <p>Notre histoire commence avec une vision pour un avenir meilleur...</p>
-			<div class="historique-content">
+            <div class="historique-content">
                 <div class="image-historique">
-                    <img src="1.jpg" alt="Mwema Divoc" />
+                    <img src="1.jpg" alt="Mwema Divoc" onerror="this.src='https://placehold.co/600x400/2c3e50/white?text=Photo+MWEMA'">
                 </div>
                 <div class="texte-historique">
                     <h2>QUI EST MWEMA DIVOC ?</h2>
-                    <p> Né à KAMINA le 25-04-2003 dans la famille BANZA. j'ai toujours été fasciné par la technologie. je me souviens encore de mon premier contact avec un ordinateur: ce n'était qu'un simple jeu, mais derriere ce jeu, je sentais qu'il y avait un monde immense à decouvrir</p>
-                    <p>Ajourd'hui je travaille sur des projets concrets, je crée des apllications, je collabore avec d'autres passionnés comme le MASTER FRANCK et je continue d'apprendre chaque jour. ce que j'aime le plus dans l'informatique, c'est la liberté de créer, d'innover et de résoudre des problemes réels</p>
-					<p> alors si tu es curieux, tu veux apprendre avec nous et construire le futur avec ton clavier alors bienvenue dans notre univers, bienvenue dans l'informatique...
-			
+                    <p>Né à KAMINA le 25-04-2003 dans la famille BANZA. J'ai toujours été fasciné par la technologie. Je me souviens encore de mon premier contact avec un ordinateur: ce n'était qu'un simple jeu, mais derrière ce jeu, je sentais qu'il y avait un monde immense à découvrir.</p>
+                    <p>Aujourd'hui je travaille sur des projets concrets, je crée des applications, je collabore avec d'autres passionnés comme le MASTER FRANCK et je continue d'apprendre chaque jour. Ce que j'aime le plus dans l'informatique, c'est la liberté de créer, d'innover et de résoudre des problèmes réels.</p>
+                    <p>Alors si tu es curieux, tu veux apprendre avec nous et construire le futur avec ton clavier alors bienvenue dans notre univers, bienvenue dans l'informatique...</p>
+                </div>
+            </div>
         </div>
-		</div>
-		
+        
         <div id="contact" class="section-content">
             <h2>Contact</h2>
             <p>Cliquez directement sur un des liens pour me contacter :</p>
-			<div class="contact-item">
-                    <a href="https://wa.me/+243996583170" target="_blank" class="contact-link">
-                        <img src="5.png" alt="WhatsApp" class="contact-icon">
-                        <span>WhatsApp : +243996583170</span>
-                    </a>
-                </div>
-                <div class="contact-item">
-                    <a href="https://www.facebook.com/divocoringwabanza" target="_blank" class="contact-link">
-                        <img src="6.png" alt="Facebook" class="contact-icon">
-                        <span>Facebook : divoc oring wa banza</span>
-                    </a>
-                </div>
-                <div class="contact-item">
-                    <a href="https://www.instagram.com/@wabanzapatrick" target="_blank" class="contact-link">
-                        <img src="7.png" alt="Instagram" class="contact-icon">
-                        <span>Instagram : @wabanzapatrick</span>
-                    </a>
-                </div>
-                <div class="contact-item">
-                    <a href="https://www.tiktok.com/@divocoring1" target="_blank" class="contact-link">
-                        <img src="8.png" alt="TikTok" class="contact-icon">
-                        <span>TikTok : @divocoring1</span>
-                    </a>
-                </div>
+            <div class="contact-item">
+                <a href="https://wa.me/+243996583170" target="_blank" class="contact-link">
+                    <img src="5.png" alt="WhatsApp" class="contact-icon" onerror="this.src='https://placehold.co/40x40/25D366/white?text=WA'">
+                    <span>WhatsApp : +243996583170</span>
+                </a>
             </div>
+            <div class="contact-item">
+                <a href="https://www.facebook.com/divocoringwabanza" target="_blank" class="contact-link">
+                    <img src="6.png" alt="Facebook" class="contact-icon" onerror="this.src='https://placehold.co/40x40/1877F2/white?text=FB'">
+                    <span>Facebook : divoc oring wa banza</span>
+                </a>
+            </div>
+            <div class="contact-item">
+                <a href="https://www.instagram.com/wabanzapatrick" target="_blank" class="contact-link">
+                    <img src="7.png" alt="Instagram" class="contact-icon" onerror="this.src='https://placehold.co/40x40/E4405F/white?text=IG'">
+                    <span>Instagram : @wabanzapatrick</span>
+                </a>
+            </div>
+            <div class="contact-item">
+                <a href="https://www.tiktok.com/@divocoring1" target="_blank" class="contact-link">
+                    <img src="8.png" alt="TikTok" class="contact-icon" onerror="this.src='https://placehold.co/40x40/000000/white?text=TT'">
+                    <span>TikTok : @divocoring1</span>
+                </a>
             </div>
         </div>
+        
         <div id="en-savoir-plus" class="section-content">
             <h2>En savoir plus</h2>
             <p>Découvrez davantage sur nos projets et initiatives.</p>
-			<!-- Photo et texte à gauche -->
+            
             <div class="photo-et-parcours">
                 <div class="photo">
-                    <img src="9.jpeg" alt="Mon parcours universitaire" />
+                    <img src="9.jpeg" alt="Mon parcours universitaire" onerror="this.src='https://placehold.co/600x400/e74c3c/white?text=Parcours+Universitaire'">
                 </div>
                 <div class="parcours">
                     <h2>MON PARCOURS UNIVERSITAIRE</h2>
-                    <p>   Je suis actuellement étudiant en informatique à l'institut supérieur de commerce de lubumbashi(ISC). passionné par la technologie et le conception de solutions innovantes, je poursuis ma formation en LICENCE 2, filiere de CONCEPTION, avec une spécialisation axée sur l'analyse, la modélisation et le développemnt d'applications.</p>
-					<p>Mon ambition est d'obtenir un diplome de MASTER à l'issue de 3 ans qui viennent. tout au long de mon parcours, j'ai eu l'occasion de travailler sur plusieurs projets pratiques qui m'ont permis de renforcer mes competences en programmation, et un peu en architecture de reseau, en conception orientée objet et en développemnt web et desktop</p>
-					<p>   Je suis motivé à contribuer au monde numerique en proposant des solutions qui répondent aux besoins réels des entreprises et des utilisateurs</p>
-					<p>   Je suis également diplomé en commerciale de gestion au complexe scolaire la providence<p>
+                    <p>Je suis actuellement étudiant en informatique à l'institut supérieur de commerce de lubumbashi (ISC). Passionné par la technologie et la conception de solutions innovantes, je poursuis ma formation en LICENCE 2, filière de CONCEPTION, avec une spécialisation axée sur l'analyse, la modélisation et le développement d'applications.</p>
+                    <p>Mon ambition est d'obtenir un diplôme de MASTER à l'issue de 3 ans qui viennent. Tout au long de mon parcours, j'ai eu l'occasion de travailler sur plusieurs projets pratiques qui m'ont permis de renforcer mes compétences en programmation, et un peu en architecture de réseau, en conception orientée objet et en développement web et desktop.</p>
+                    <p>Je suis motivé à contribuer au monde numérique en proposant des solutions qui répondent aux besoins réels des entreprises et des utilisateurs.</p>
+                    <p>Je suis également diplômé en commerciale de gestion au complexe scolaire la providence.</p>
                 </div>
             </div>
 
-            <!-- Titre Mes projets et informations -->
             <div class="mes-projets">
                 <h2>MES PROJETS</h2>
-                <p>Etant un étudiant qui se specialise en conception des apllications, j'ai plusieurs defis et projets que je pense realiser:</p>
-				<p> - créer de site web pour les besoins des clients</p>
-				<p> - concevoir des applications mobiles</p>
-				<p> - créer un projet de systeme ou de billeterie</p>
-				<p> - créer un systeme d'authentification et de gestion des utilisateurs</p>
-				<p> - concevoir un mini-ERP ou un CRM </p>
-				<p> pourquoi pas un projet de vote électronique pour mon pays et l'automatisation de taches</p>
+                <p>Étant un étudiant qui se spécialise en conception des applications, j'ai plusieurs défis et projets que je pense réaliser :</p>
+                <ul>
+                    <li>Créer des sites web pour les besoins des clients</li>
+                    <li>Concevoir des applications mobiles</li>
+                    <li>Créer un projet de système de billeterie</li>
+                    <li>Créer un système d'authentification et de gestion des utilisateurs</li>
+                    <li>Concevoir un mini-ERP ou un CRM</li>
+                    <li>Pourquoi pas un projet de vote électronique pour mon pays et l'automatisation de tâches</li>
+                </ul>
             </div>
 
-            <!-- Titre Mes amis et photos -->
             <div class="mes-amis">
-                <h2>MES PHOTOS </h2>
+                <h2>MES PHOTOS</h2>
                 <div class="amis-photos">
                     <div class="ami">
-                        <img src="10.jpg" alt="Ami 1" />
-                        <p>Moi et mon ami RICHARD MUKUNGU </p>
+                        <img src="10.jpg" alt="Ami 1" onerror="this.src='https://placehold.co/400x300/3498db/white?text=Photo+1'">
+                        <p>Moi et mon ami RICHARD MUKUNGU</p>
                     </div>
                     <div class="ami">
-                        <img src="11.jpg" alt="Ami 2" />
+                        <img src="11.jpg" alt="Ami 2" onerror="this.src='https://placehold.co/400x300/2c3e50/white?text=Photo+2'">
                         <p>Divoc</p>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-		 <div id="acceuil" class="section-content">
-            <h2>services</h2>
-            <p>Voici un aperçu de services que nous propose ce site:</p>
-			 <!-- Titre FORMATION -->
+        
+        <div id="service" class="section-content">
+            <h2>Nos Services</h2>
+            <p>Voici un aperçu des services que nous proposons :</p>
+            
             <div class="formation">
                 <h2>FORMATION EN PROGRAMMATION</h2>
-                <p>chez nous, nous croyons fermement que la formation est la cle de la reussite professionnelle. c'est pourquoi nous avons concu une gamme de formations adaptees a tous les niveaux et besoins de programmation</p>
-				<br>
-				<p>pourquoi nous choisir?</p>
-				<br>
-				<p>1. nos formateurs sont des professionnels experimentes et passionnes dans leur domaine. ils vous transmettront des connaissances pratiques et des competences concretes</p>
-				<p>2. que vous soyez debutant ou rn quete de perfectionnement, nos formations couvrent une multitude de themes, allant de liste de quelques themes ou domaines a autres themes</p>
-				<p>3. nos formations peuvent etre dispensees en presentiel ou en ligne, selon vos preferences</p>
-				<p>4. a l'issue de chaque formation, vous recevez un certificat qui valorisera vos nouvelles competences sur le marche du travail</p>
-				<br>
-				<p> nous vous invitons a explorer notre catologue de formations pour decouvrir celle qui repondra le mieux a vos aspirations et a vos objectifs professionnels</p>
+                <p>Chez nous, nous croyons fermement que la formation est la clé de la réussite professionnelle. C'est pourquoi nous avons conçu une gamme de formations adaptées à tous les niveaux et besoins de programmation.</p>
+                
+                <div class="card">
+                    <h3>Pourquoi nous choisir?</h3>
+                    <ul>
+                        <li><span class="highlight">Formateurs expérimentés</span> : Nos formateurs sont des professionnels expérimentés et passionnés dans leur domaine.</li>
+                        <li><span class="highlight">Programmes complets</span> : Que vous soyez débutant ou en quête de perfectionnement, nos formations couvrent une multitude de thèmes.</li>
+                        <li><span class="highlight">Flexibilité</span> : Nos formations peuvent être dispensées en présentiel ou en ligne, selon vos préférences.</li>
+                        <li><span class="highlight">Certification</span> : À l'issue de chaque formation, vous recevez un certificat qui valorisera vos nouvelles compétences.</li>
+                    </ul>
+                </div>
+                
+                <p>Nous vous invitons à explorer notre catalogue de formations pour découvrir celle qui répondra le mieux à vos aspirations et à vos objectifs professionnels.</p>
             </div>
 
-            <!-- Photo sous le titre FORMATION -->
             <div class="photo-formation">
-                <img src="12.jpg" alt="Formation photo" />
+                <img src="12.jpg" alt="Formation photo" onerror="this.src='https://placehold.co/800x400/2c3e50/white?text=Formation+en+Programmation'">
             </div>
 
-            <!-- Titre CREATION DES APPLICATIONS -->
             <div class="creation-applications">
-                <h2>CREATION DES APPLICATIONS</h2>
-                <p>Je suis spécialisé dans la création d'applications mobiles et web adaptées aux besoins des utilisateurs...</p>
+                <h2>CRÉATION D'APPLICATIONS</h2>
+                <p>Je suis spécialisé dans la création d'applications mobiles et web adaptées aux besoins des utilisateurs. Chaque projet est conçu avec soin pour offrir une expérience utilisateur optimale et des fonctionnalités robustes.</p>
+                
+                <div class="card">
+                    <h3>Types d'applications que je développe :</h3>
+                    <ul>
+                        <li>Applications web responsive</li>
+                        <li>Applications mobiles (Android et iOS)</li>
+                        <li>Solutions e-commerce</li>
+                        <li>Applications métiers sur mesure</li>
+                        <li>Systèmes de gestion de contenu</li>
+                    </ul>
+                </div>
+                
+                <a href="#contact" class="btn" onclick="afficher('contact'); return false;">Demander un devis</a>
             </div>
         </div>
-		
-		
-
     </section>
 
     <footer>
@@ -165,15 +524,45 @@
     <script>
         // Fonction pour afficher la section correspondant au lien
         function afficher(section) {
+            // Masquer toutes les sections
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(sec => {
+                sec.classList.remove('active');
+            });
             
             // Afficher la section correspondante
-            document.getElementById(section).style.display = 'block';
+            document.getElementById(section).classList.add('active');
+            
+            // Mettre à jour la classe active dans la navigation
+            const links = document.querySelectorAll('nav a');
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + section) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Fermer le menu mobile si ouvert
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.remove('active');
         }
 
-        // Par défaut, afficher la section Accueil
-        afficher('acceuil');
+        // Gestion du menu burger en version mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        });
+
+        // Gestion des erreurs d'images
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.onerror = function() {
+                    // Cette partie est déjà gérée dans le HTML avec onerror
+                };
+            });
+        });
     </script>
-	
 
 </body>
 </html>
